@@ -1,11 +1,10 @@
 import './App.css';
+import LoginForm from './features/auth/components/LoginForm.tsx';
 
 function App() {
   return (
     <>
-      <div>
-        <h1>Hello, React.js</h1>
-      </div>
+      <LoginForm />
     </>
   );
 }
