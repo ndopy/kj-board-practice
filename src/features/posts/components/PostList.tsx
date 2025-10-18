@@ -29,28 +29,30 @@ export default function PostList() {
           </tr>
         </thead>
         <tbody>
-          {mockPostsData.map(post => (
-            <tr key={post.id} className="border-b border-slate-300 hover:bg-slate-50 ">
-              <td className="p-3 text-left border-b border-slate-300">{post.id}</td>
-              <td className="p-3 text-left border-b border-slate-300">
-                <Link
-                  to={'#'}
-                  className="flex items-center cursor-pointer hover:underline hover:font-[500]"
-                >
-                  {post.title}
-                  {/* comments 및 아이콘 */}
-                  <div className="flex items-center gap-0.5">
-                    <ChatBubbleLeftIcon className="inline-block w-4 h-4 ml-2" />
-                    <span className="text-gray-600">{post.comments}</span>
-                  </div>
-                </Link>
-              </td>
-              <td className="p-3 text-left border-b border-slate-300">{post.author}</td>
-              <td className="p-3 text-left border-b border-slate-300">{post.createdAt}</td>
-              <td className="p-3 text-center border-b border-slate-300">{post.views}</td>
-              <td className="p-3 text-center border-b border-slate-300">{post.likes}</td>
-            </tr>
-          ))}
+          {mockPostsData.map(
+            ({ id, title, authorName, createdAt, views, likeCount, commentCount }) => (
+              <tr key={id} className="border-b border-slate-300 hover:bg-slate-50 ">
+                <td className="p-3 text-left border-b border-slate-300">{id}</td>
+                <td className="p-3 text-left border-b border-slate-300">
+                  <Link
+                    to={'#'}
+                    className="flex items-center cursor-pointer hover:underline hover:font-[500]"
+                  >
+                    {title}
+                    {/* comments 및 아이콘 */}
+                    <div className="flex items-center gap-0.5">
+                      <ChatBubbleLeftIcon className="inline-block w-4 h-4 ml-2" />
+                      <span className="text-gray-600">{commentCount}</span>
+                    </div>
+                  </Link>
+                </td>
+                <td className="p-3 text-left border-b border-slate-300">{authorName}</td>
+                <td className="p-3 text-left border-b border-slate-300">{createdAt}</td>
+                <td className="p-3 text-center border-b border-slate-300">{views}</td>
+                <td className="p-3 text-center border-b border-slate-300">{likeCount}</td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </div>

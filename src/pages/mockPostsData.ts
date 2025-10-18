@@ -4,9 +4,10 @@ export interface Post {
   content: string;
   createdAt: string;
   updatedAt: string;
-  author: string;
-  likes: number;
-  comments: number;
+  authorId: number;
+  authorName: string;
+  likeCount: number;
+  commentCount: number;
   isLiked: boolean;
   views: number;
 }
@@ -19,9 +20,10 @@ export const mockPostsData: Post[] = [
       'Zustand, Recoil, Jotai의 장단점을 심도 있게 분석해봅니다. 어떤 프로젝트에 어떤 라이브러리가 적합할까요?',
     createdAt: '2023-10-27 10:30:15',
     updatedAt: '2023-10-27 11:05:00',
-    author: '김민준',
-    likes: 128,
-    comments: 16,
+    authorId: 101,
+    authorName: '김민준',
+    likeCount: 128,
+    commentCount: 16,
     isLiked: true,
     views: 1532
   },
@@ -32,9 +34,10 @@ export const mockPostsData: Post[] = [
       '이번에 새로 릴리즈된 Next.js 14의 주요 기능과 변경점을 정리했습니다. 서버 액션이 더욱 강력해졌네요!',
     createdAt: '2023-10-26 18:45:30',
     updatedAt: '2023-10-26 18:45:30',
-    author: '이서아',
-    likes: 256,
-    comments: 32,
+    authorId: 102,
+    authorName: '이서아',
+    likeCount: 256,
+    commentCount: 32,
     isLiked: false,
     views: 3128
   },
@@ -45,9 +48,10 @@ export const mockPostsData: Post[] = [
       '타입스크립트의 꽃, 제네릭에 대해 알아봅니다. 재사용 가능한 컴포넌트와 함수를 만드는 비법!',
     createdAt: '2023-10-26 14:20:00',
     updatedAt: '2023-10-27 09:10:25',
-    author: '박지훈',
-    likes: 98,
-    comments: 12,
+    authorId: 103,
+    authorName: '박지훈',
+    likeCount: 98,
+    commentCount: 12,
     isLiked: false,
     views: 1245
   },
@@ -57,9 +61,10 @@ export const mockPostsData: Post[] = [
     content: '회사 근처 맛집 아시는 분? 매일 점심 메뉴 고르는 게 일이네요. ㅠㅠ',
     createdAt: '2023-10-25 11:50:45',
     updatedAt: '2023-10-25 11:50:45',
-    author: '최유나',
-    likes: 5,
-    comments: 22,
+    authorId: 104,
+    authorName: '최유나',
+    likeCount: 5,
+    commentCount: 22,
     isLiked: true,
     views: 354
   },
@@ -70,9 +75,10 @@ export const mockPostsData: Post[] = [
       'Flexbox는 1차원, Grid는 2차원 레이아웃을 위해 사용됩니다. 두 가지를 조합하여 복잡한 레이아웃을 쉽게 만들어보세요.',
     createdAt: '2023-10-24 22:10:10',
     updatedAt: '2023-10-24 22:10:10',
-    author: '김민준',
-    likes: 77,
-    comments: 8,
+    authorId: 101,
+    authorName: '김민준',
+    likeCount: 77,
+    commentCount: 8,
     isLiked: false,
     views: 988
   },
@@ -83,9 +89,10 @@ export const mockPostsData: Post[] = [
       '프로젝트에 Vite를 도입해본 후기입니다. 개발 서버 구동 속도가 정말 신세계네요. HMR(Hot Module Replacement) 속도도 만족스럽습니다.',
     createdAt: '2023-10-23 16:00:05',
     updatedAt: '2023-10-23 16:00:05',
-    author: '이서아',
-    likes: 150,
-    comments: 25,
+    authorId: 102,
+    authorName: '이서아',
+    likeCount: 150,
+    commentCount: 25,
     isLiked: true,
     views: 2241
   },
@@ -96,9 +103,10 @@ export const mockPostsData: Post[] = [
       '의존성 배열(dependency array)을 잘못 관리하면 발생하는 무한 루프! 흔히 하는 실수와 해결 방법을 공유합니다.',
     createdAt: '2023-10-22 13:30:00',
     updatedAt: '2023-10-22 15:00:40',
-    author: '박지훈',
-    likes: 201,
-    comments: 41,
+    authorId: 103,
+    authorName: '박지훈',
+    likeCount: 201,
+    commentCount: 41,
     isLiked: true,
     views: 2876
   },
@@ -108,9 +116,10 @@ export const mockPostsData: Post[] = [
     content: 'M2 맥북 에어와 그램 사이에서 고민 중입니다. 선배님들의 조언을 구합니다!',
     createdAt: '2023-10-21 09:05:12',
     updatedAt: '2023-10-21 09:05:12',
-    author: '최유나',
-    likes: 33,
-    comments: 50,
+    authorId: 104,
+    authorName: '최유나',
+    likeCount: 33,
+    commentCount: 50,
     isLiked: false,
     views: 768
   },
@@ -121,9 +130,10 @@ export const mockPostsData: Post[] = [
       'HTML이 지저분해진다는 단점에도 불구하고 왜 많은 개발자들이 Tailwind CSS를 선택할까요? 생산성 측면에서 고찰해봅니다.',
     createdAt: '2023-10-20 17:55:00',
     updatedAt: '2023-10-20 17:55:00',
-    author: '김민준',
-    likes: 89,
-    comments: 19,
+    authorId: 101,
+    authorName: '김민준',
+    likeCount: 89,
+    commentCount: 19,
     isLiked: false,
     views: 1102
   },
@@ -134,9 +144,10 @@ export const mockPostsData: Post[] = [
       '드디어 첫 토이 프로젝트를 Vercel로 배포했습니다. 클릭 몇 번으로 배포가 되다니 정말 편리하네요. 다음 목표는 AWS에 직접 배포해보기입니다.',
     createdAt: '2023-10-19 23:40:21',
     updatedAt: '2023-10-19 23:40:21',
-    author: '정다은',
-    likes: 312,
-    comments: 60,
+    authorId: 105,
+    authorName: '정다은',
+    likeCount: 312,
+    commentCount: 60,
     isLiked: true,
     views: 5420
   }
