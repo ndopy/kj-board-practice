@@ -11,15 +11,15 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow-md z-10">
+    <header className="sticky top-0 left-0 right-0 h-16 bg-white shadow-md z-10">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/posts" className="flex items-center">
-          <KraftonJungleLogo className="w-24" />
+          <KraftonJungleLogo className="w-28" />
         </Link>
         <nav className="flex items-center space-x-4">
           <button
             type="button"
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 cursor-pointer"
             onClick={handleLogout}
           >
             <ArrowRightStartOnRectangleIcon className="h-6 w-6" />
