@@ -5,6 +5,7 @@ import MainLayout from './layouts/MainLayout.tsx';
 import LoginForm from './features/auth/components/LoginForm.tsx';
 import SignUpForm from './features/auth/components/SignUpForm.tsx';
 import PostsPage from './pages/PostsPage.tsx';
+import PostForm from '@/features/posts/components/PostForm.tsx';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         {/* Header 있는 페이지 그룹 */}
         <Route element={<MainLayout />}>
           <Route path="/posts" element={<PostsPage />} />
+          <Route path="/posts/write" element={<PostForm />} />
         </Route>
       </Routes>
     </BrowserRouter>
