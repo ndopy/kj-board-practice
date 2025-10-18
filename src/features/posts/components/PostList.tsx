@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function PostList() {
   return (
-    <div className="w-3/4 mt-4 mx-auto rounded-md bg-white p-4">
+    <div className="w-full mx-auto rounded-md bg-white p-4">
       <table className="min-w-full table-fixed border-collapse rounded-md">
         <thead className="bg-gray-100">
           <tr>
