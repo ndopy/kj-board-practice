@@ -12,12 +12,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Header 없는 페이지 그룹 */}
-        <Route path="/" element={<LoginForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignUpForm />} />
 
         {/* Header 있는 페이지 그룹 */}
         <Route element={<MainLayout />}>
+          <Route path="/" element={<PostsPage />} />
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/posts/write" element={<PostForm />} />
         </Route>

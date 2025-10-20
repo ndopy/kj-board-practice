@@ -1,16 +1,55 @@
-import { type FormEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 import Input from '../../../components/common/Input';
 import AuthLayout from './AuthLayout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({
+    userId: '',
+    password: '',
+  });
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ userId, password });
-    // TODO: 로그인 API 연동
+    setError(null); // 이전 에러 메시지 초기화
+
+    const url = 'http://localhost:3000/auth/login';
+    const options: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(form),
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+
+      if (!response.ok) {
+        // 서버에서 내려주는 에러 메시지를 사용하거나 기본 메시지를 표시합니다.
+        throw new Error(data.message || '로그인에 실패했습니다.');
+      }
+
+      // 로그인 성공 시 쿠키는 브라우저가 자동으로 저장합니다.
+      // 이제 사용자를 메인 페이지로 이동시킵니다.
+      navigate('/');
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('알 수 없는 오류가 발생했습니다.');
+      }
+      console.error(err);
+    }
   };
 
   return (
@@ -19,7 +58,10 @@ export default function LoginForm() {
       footer={
         <>
           <span className="text-gray-700">계정이 없으신가요? </span>
-          <Link to="/signup" className="font-bold text-blue-500 hover:underline">
+          <Link
+            to="/signup"
+            className="font-bold text-blue-500 hover:underline"
+          >
             가입하기
           </Link>
         </>
@@ -32,8 +74,8 @@ export default function LoginForm() {
           id="userId"
           name="userId"
           placeholder="아이디"
-          value={userId}
-          onChange={e => setUserId(e.target.value)}
+          value={form.userId}
+          onChange={handleChange}
           required
         />
         <Input
@@ -42,10 +84,12 @@ export default function LoginForm() {
           id="password"
           name="password"
           placeholder="비밀번호"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
           required
         />
+
+        {error && <p className="text-sm text-red-500">{error}</p>}
 
         <button
           type="submit"
