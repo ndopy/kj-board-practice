@@ -5,7 +5,9 @@ import MainLayout from './layouts/MainLayout.tsx';
 import LoginForm from './features/auth/components/LoginForm.tsx';
 import SignUpForm from './features/auth/components/SignUpForm.tsx';
 import PostsPage from './pages/PostsPage.tsx';
-import PostForm from '@/features/posts/components/PostForm.tsx';
+import PostCreate from '@/features/posts/components/PostCreate.tsx';
+import PostDetail from '@/features/posts/components/PostDetail.tsx';
+import PostEdit from '@/features/posts/components/PostEdit.tsx';
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<PostsPage />} />
           <Route path="/posts" element={<PostsPage />} />
-          <Route path="/posts/write" element={<PostForm />} />
+          <Route path="/posts/write" element={<PostCreate />} />
+          <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/posts/:id/edit" element={<PostEdit />} />
         </Route>
       </Routes>
     </BrowserRouter>
