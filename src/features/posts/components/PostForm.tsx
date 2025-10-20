@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function PostForm() {
   // 사용자가 입력한 제목과 내용을 상태로 관리하기
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  // 로그인한 사용자 정보
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -21,8 +25,8 @@ export default function PostForm() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        authorId: 'hong',
-        authorName: '홍길동',
+        authorId: user?.id,
+        authorName: user?.name,
         title,
         content
       })
@@ -43,7 +47,7 @@ export default function PostForm() {
       <ul className="pt-10 flex flex-col gap-8">
         <li>
           <div className="text-xl font-extrabold">작성자</div>
-          <div className="py-3.5 border-b-1 border-b-gray-300">홍길동</div>
+          <div className="py-3.5 border-b-1 border-b-gray-300">{user?.name}</div>
         </li>
         <li>
           <div className="text-xl font-extrabold">제목</div>
