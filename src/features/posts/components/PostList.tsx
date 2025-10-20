@@ -72,27 +72,42 @@ export default function PostList() {
     return <div className="text-center p-10 text-red-500">에러: {error}</div>;
   }
 
+  // 페이지네이션 번호 목록을 계산하는 로직
+  const getPageNumbers = () => {
+    if (!meta) return [];
+
+    const PAGE_GROUP_SIZE = 5; // 한 번에 보여줄 페이지 번호 개수
+    const currentPageGroup = Math.ceil(page / PAGE_GROUP_SIZE);
+    let lastPageGroup = Math.ceil(meta.last_page / PAGE_GROUP_SIZE);
+    if (lastPageGroup === 0) lastPageGroup = 1;
+
+    const startPage = (currentPageGroup - 1) * PAGE_GROUP_SIZE + 1;
+    const endPage = Math.min(startPage + PAGE_GROUP_SIZE - 1, meta.last_page);
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  };
+
   return (
     <div className="w-full mx-auto rounded-md bg-white p-4">
       <table className="min-w-full table-fixed border-collapse rounded-md text-sm">
         <thead className="border-y-2 border-green-500">
           <tr>
-            <th scope="col" className="w-[8%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-3 text-left border-b border-slate-300">
               번호
             </th>
-            <th scope="col" className="w-[40%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[50%] p-3 text-left border-b border-slate-300">
               제목
             </th>
-            <th scope="col" className="w-[8%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-3 text-left border-b border-slate-300">
               작성자
             </th>
-            <th scope="col" className="w-[25%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[15%] p-3 text-left border-b border-slate-300">
               작성일
             </th>
-            <th scope="col" className="w-[12%] p-3 text-center border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-3 text-center border-b border-slate-300">
               조회수
             </th>
-            <th scope="col" className="w-[12%] p-3 text-center border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-3 text-center border-b border-slate-300">
               좋아요
             </th>
           </tr>
@@ -145,7 +160,7 @@ export default function PostList() {
               </button>
             </li>
             {/* 페이지 번호 목록 */}
-            {Array.from({ length: meta.last_page }, (_, i) => i + 1).map(pageNumber => (
+            {getPageNumbers().map(pageNumber => (
               <li
                 key={pageNumber}
                 className={page === pageNumber ? 'bg-green-600 text-white' : ''}
