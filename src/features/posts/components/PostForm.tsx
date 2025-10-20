@@ -1,10 +1,40 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function PostForm() {
+  // 사용자가 입력한 제목과 내용을 상태로 관리하기
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
   const navigate = useNavigate();
 
   const handleNavigateToPostsPage = () => {
     navigate('/posts');
+  };
+
+  // 작성하기 버튼 이벤트
+  const handleWritePost = async () => {
+    const url = 'http://localhost:3000/posts';
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        authorId: 'hong',
+        authorName: '홍길동',
+        title,
+        content
+      })
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -22,6 +52,8 @@ export default function PostForm() {
               <input
                 type="text"
                 id="title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
                 className="w-full pt-1 pb-0.5 outline-none border-b-gray-300 border-b-1 focus:border-b-gray-500"
               />
             </label>
@@ -33,6 +65,8 @@ export default function PostForm() {
             <label htmlFor="content">
               <textarea
                 id="content"
+                value={content}
+                onChange={e => setContent(e.target.value)}
                 className="w-full h-40 p-3 resize-none outline-none border-1 border-gray-300 focus:border-gray-500"
               ></textarea>
             </label>
@@ -42,6 +76,7 @@ export default function PostForm() {
       {/* 버튼 그룹 */}
       <div className="mt-2 flex justify-end gap-8">
         <button
+          onClick={handleWritePost}
           className="w-[10rem] p-3 rounded-md text-xl bg-white text-green-600 border-2 border-green-600 cursor-pointer
                 hover:bg-green-600 hover:text-white transition-all 0.5s"
         >

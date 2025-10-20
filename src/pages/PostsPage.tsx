@@ -1,7 +1,7 @@
 import PostList from '../features/posts/components/PostList.tsx';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/16/solid';
 import { ArrowRightIcon } from '@heroicons/react/16/solid';
-import { useNavigate } from 'react-router-dom';
 
 export default function PostsPage() {
   const navigate = useNavigate();
