@@ -1,9 +1,11 @@
 import { type FormEvent, useState } from 'react';
 import Input from '../../../components/common/Input';
 import AuthLayout from './AuthLayout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignUpForm() {
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,8 +34,13 @@ export default function SignUpForm() {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data);
-      alert(data.message);
+
+      if (!response.ok) {
+        alert(data.message);
+      }
+
+      alert(`환영합니다, ${data.name}님!`);
+      navigate('/login');
     } catch (e) {
       console.error(e);
     }
