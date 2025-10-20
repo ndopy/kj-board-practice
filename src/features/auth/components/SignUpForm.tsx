@@ -7,15 +7,36 @@ export default function SignUpForm() {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    console.log({ userId, password });
-    // TODO: 회원가입 API 연동
+
+    const url = 'http://localhost:3000/auth/signup';
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        password,
+        name
+      })
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      alert(data.message);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -39,6 +60,16 @@ export default function SignUpForm() {
           placeholder="아이디"
           value={userId}
           onChange={e => setUserId(e.target.value)}
+          required
+        />
+        <Input
+          label="이름"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="이름"
+          value={name}
+          onChange={e => setName(e.target.value)}
           required
         />
         <Input
