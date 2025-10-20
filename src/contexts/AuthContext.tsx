@@ -7,8 +7,11 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  setUser: (user: User | null) => void;
   isLoggedIn: boolean;
   isLoading: boolean;
+  login: (user: User) => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,12 +27,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           credentials: 'include'
         });
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
-        } else {
+        if (response.status === 401) {
+          // 401 Unauthorized는 로그아웃 상태를 의미하므로 정상적인 케이스로 처리합니다.
           setUser(null);
+          return;
         }
+
+        if (!response.ok) {
+          console.error('Failed to fetch user status:', response.status, response.statusText);
+        }
+        const userData = await response.json();
+        setUser(userData);
       } catch (error) {
         console.error('Failed to fetch user: ', error);
       } finally {
@@ -40,7 +48,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     fetchUser();
   }, []);
 
-  const value = { user, isLoggedIn: !!user, isLoading };
+  const logout = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        throw new Error('Logout Failed');
+      }
+
+      // 로그아웃 성공 시 user 상태를 null 로 즉시 업데이트
+      setUser(null);
+    } catch (e) {
+      console.error(`Logout error: ${e}`);
+      throw e;
+    }
+  };
+
+  // 로그인 성공 시, user 상태를 업데이트하는 함수
+  const login = (loggedInUser: User) => {
+    setUser(loggedInUser);
+  };
+
+  const value = { user, setUser, isLoggedIn: !!user, isLoading, login, logout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -2,11 +2,13 @@ import { type ChangeEvent, type FormEvent, useState } from 'react';
 import Input from '../../../components/common/Input';
 import AuthLayout from './AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function LoginForm() {
+  const { login } = useAuth();
   const [form, setForm] = useState({
     userId: '',
-    password: '',
+    password: ''
   });
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -24,10 +26,10 @@ export default function LoginForm() {
     const options: RequestInit = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify(form),
+      body: JSON.stringify(form)
     };
 
     try {
@@ -36,11 +38,11 @@ export default function LoginForm() {
 
       if (!response.ok) {
         // 서버에서 내려주는 에러 메시지를 사용하거나 기본 메시지를 표시합니다.
+        // alert(data.message || '로그인에 실패했습니다.');
         throw new Error(data.message || '로그인에 실패했습니다.');
       }
 
-      // 로그인 성공 시 쿠키는 브라우저가 자동으로 저장합니다.
-      // 이제 사용자를 메인 페이지로 이동시킵니다.
+      login(data);
       navigate('/');
     } catch (err) {
       if (err instanceof Error) {
@@ -58,10 +60,7 @@ export default function LoginForm() {
       footer={
         <>
           <span className="text-gray-700">계정이 없으신가요? </span>
-          <Link
-            to="/signup"
-            className="font-bold text-blue-500 hover:underline"
-          >
+          <Link to="/signup" className="font-bold text-blue-500 hover:underline">
             가입하기
           </Link>
         </>

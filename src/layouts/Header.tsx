@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/16/solid';
 
@@ -6,11 +6,17 @@ import KraftonJungleLogo from '@/assets/kj-logo.svg?react';
 import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function Header() {
-  const { isLoggedIn, user, isLoading } = useAuth();
-
-  const handleLogout = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn, user, isLoading, logout } = useAuth();
+  const handleLogout = async () => {
     // TODO: 로그아웃 로직 구현
-    console.log('Logout clicked');
+    try {
+      await logout();
+      alert('로그아웃 되었습니다.');
+      navigate('/login');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
