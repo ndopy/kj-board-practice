@@ -1,7 +1,5 @@
 import PostList from '../features/posts/components/PostList.tsx';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeftIcon } from '@heroicons/react/16/solid';
-import { ArrowRightIcon } from '@heroicons/react/16/solid';
 import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function PostsPage() {
@@ -29,27 +27,6 @@ export default function PostsPage() {
           </button>
         </div>
       )}
-      <div className="mt-4 flex justify-center items-center">
-        {/* 페이지네이션 */}
-        <ul
-          className="flex items-center gap-2
-            [&>li]:w-8 [&>li]:h-8 [&>li]:flex [&>li]:items-center [&>li]:justify-center [&>li]:rounded-md
-            [&>li]:transition-all [&>li]:duration-250 [&>li]:cursor-pointer
-            [&>li:hover]:bg-green-600 [&>li:hover]:text-white"
-        >
-          <li>
-            <ArrowLeftIcon className="h-4 w-4" />
-          </li>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>
-            <ArrowRightIcon className="h-4 w-4" />
-          </li>
-        </ul>
-      </div>
     </div>
   );
 }
