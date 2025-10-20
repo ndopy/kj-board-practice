@@ -2,9 +2,11 @@ import PostList from '../features/posts/components/PostList.tsx';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/16/solid';
 import { ArrowRightIcon } from '@heroicons/react/16/solid';
+import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function PostsPage() {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
 
   const handleNavigateToWritePage = () => {
     navigate('/posts/write');
@@ -15,16 +17,18 @@ export default function PostsPage() {
       <div className="rounded-md">
         <PostList />
       </div>
-      {/* 글 쓰기 버튼 */}
-      <div className="mt-1 flex justify-end">
-        <button
-          className="mr-5 py-2 px-7 rounded-md text-green-600 border border-green-600 tracking-widest
-                    hover:bg-green-600 hover:text-white transition-all 0.5s cursor-pointer"
-          onClick={handleNavigateToWritePage}
-        >
-          글쓰기
-        </button>
-      </div>
+      {/* 로그인한 사용자에게만 글쓰기 버튼을 보여줍니다. */}
+      {isLoggedIn && (
+        <div className="mt-1 flex justify-end">
+          <button
+            className="mr-5 py-2 px-7 rounded-md text-green-600 border border-green-600 tracking-widest
+                      hover:bg-green-600 hover:text-white transition-all 0.5s cursor-pointer"
+            onClick={handleNavigateToWritePage}
+          >
+            글쓰기
+          </button>
+        </div>
+      )}
       <div className="mt-4 flex justify-center items-center">
         {/* 페이지네이션 */}
         <ul

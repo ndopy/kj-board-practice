@@ -33,7 +33,9 @@ export default function Header() {
                 </button>
               </>
             ) : (
-              <Link to="/login" className="font-semibold text-gray-600 hover:text-gray-900" />
+              <Link to="/login" className="font-semibold text-gray-600 hover:text-gray-900">
+                로그인
+              </Link>
             ))}
         </nav>
       </div>

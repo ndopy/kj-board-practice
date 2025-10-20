@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext.tsx';
 
 export default function PostForm() {
+  const navigate = useNavigate();
+
   // 사용자가 입력한 제목과 내용을 상태로 관리하기
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -10,7 +12,11 @@ export default function PostForm() {
   // 로그인한 사용자 정보
   const { user } = useAuth();
 
-  const navigate = useNavigate();
+  // 로그인한 사용자 정보가 없을 경우 로그인 화면으로 이동
+  if (!user) {
+    navigate('/login');
+    return null;
+  }
 
   const handleNavigateToPostsPage = () => {
     navigate('/posts');
