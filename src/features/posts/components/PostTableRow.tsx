@@ -13,14 +13,11 @@ export default function PostTableRow({ post }: PostTableRowProps) {
     <tr className="border-b border-slate-300 hover:bg-slate-50 ">
       <td className="p-2 text-left">{no}</td>
       <td className="p-2 text-left">
-        <Link
-          to={`/posts/${_id}`}
-          className="flex items-center cursor-pointer hover:underline hover:font-[500]"
-        >
+        <Link to={`/posts/${_id}`} className="flex items-center cursor-pointer hover:font-[500]">
           {title}
           <div className="flex items-center gap-0.5 ml-2">
-            <ChatBubbleLeftIcon className="inline-block w-4 h-4" />
-            <span className="text-gray-600">{commentCount}</span>
+            <ChatBubbleLeftIcon className="inline-block w-3 h-3" />
+            <span className="text-gray-600 text-xs">{commentCount}</span>
           </div>
         </Link>
       </td>
