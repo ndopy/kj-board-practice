@@ -92,22 +92,22 @@ export default function PostList() {
       <table className="min-w-full table-fixed border-collapse rounded-md text-sm">
         <thead className="border-y-2 border-green-500">
           <tr>
-            <th scope="col" className="w-[10%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[5%] p-2 text-left border-b border-slate-300">
               번호
             </th>
-            <th scope="col" className="w-[50%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[50%] p-2 text-left border-b border-slate-300">
               제목
             </th>
-            <th scope="col" className="w-[10%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-2 text-left border-b border-slate-300">
               작성자
             </th>
-            <th scope="col" className="w-[15%] p-3 text-left border-b border-slate-300">
+            <th scope="col" className="w-[20%] p-2 text-left border-b border-slate-300">
               작성일
             </th>
-            <th scope="col" className="w-[10%] p-3 text-center border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-2 text-center border-b border-slate-300">
               조회수
             </th>
-            <th scope="col" className="w-[10%] p-3 text-center border-b border-slate-300">
+            <th scope="col" className="w-[10%] p-2 text-center border-b border-slate-300">
               좋아요
             </th>
           </tr>
@@ -116,8 +116,8 @@ export default function PostList() {
           {posts.map(
             ({ no, _id, title, authorName, createdAt, views, likeCount, commentCount }) => (
               <tr key={_id} className="border-b border-slate-300 hover:bg-slate-50 ">
-                <td className="p-3 text-left border-b border-slate-300">{no}</td>
-                <td className="p-3 text-left border-b border-slate-300">
+                <td className="p-2 text-left border-b border-slate-300">{no}</td>
+                <td className="p-2 text-left border-b border-slate-300">
                   <Link
                     to={`/posts/${_id}`}
                     className="flex items-center cursor-pointer hover:underline hover:font-[500]"
@@ -130,10 +130,10 @@ export default function PostList() {
                     </div>
                   </Link>
                 </td>
-                <td className="p-3 text-left border-b border-slate-300">{authorName}</td>
-                <td className="p-3 text-left border-b border-slate-300">{createdAt}</td>
-                <td className="p-3 text-center border-b border-slate-300">{views}</td>
-                <td className="p-3 text-center border-b border-slate-300">{likeCount}</td>
+                <td className="p-2 text-left border-b border-slate-300">{authorName}</td>
+                <td className="p-2 text-left border-b border-slate-300">{createdAt}</td>
+                <td className="p-2 text-center border-b border-slate-300">{views}</td>
+                <td className="p-2 text-center border-b border-slate-300">{likeCount}</td>
               </tr>
             )
           )}
