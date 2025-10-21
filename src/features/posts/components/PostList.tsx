@@ -1,4 +1,4 @@
-import { usePosts } from '../hooks/usePosts';
+import { usePosts } from '../hooks/usePosts.ts';
 import Pagination from './Pagination';
 import PostTable from './PostTable';
 

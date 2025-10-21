@@ -1,4 +1,4 @@
-import { usePostEdit } from '@/features/posts/hooks/usePostEdit';
+import { usePostEdit } from '@/features/posts/hooks/usePostEdit.ts';
 
 interface PostEditFormProps {
   authorName: string;
