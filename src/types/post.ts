@@ -2,6 +2,8 @@ export interface Post {
   no: number;
   _id: string;
   title: string;
+  content: string;
+  authorId: string;
   authorName: string;
   createdAt: string;
   views: number;
@@ -14,3 +16,5 @@ export interface Meta {
   page: number;
   last_page: number;
 }
+
+export type UpdatePostPayload = Pick<Post, 'title' | 'content'>;
