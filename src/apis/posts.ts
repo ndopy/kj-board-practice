@@ -44,3 +44,15 @@ export const updatePostAPI = async (id: string, postData: UpdatePostPayload): Pr
   }
   return {} as Post; // 혹은 다른 적절한 기본값
 };
+
+export const deletePostAPI = async (id: string): Promise<void> => {
+  const response = await fetch(`http://localhost:3000/posts/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('게시글 삭제에 실패했습니다.');
+  }
+  // 삭제 성공 시에는 보통 응답 본문이 없으므로, 별도의 반환 값은 없다.
+  return;
+};
