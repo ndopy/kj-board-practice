@@ -23,8 +23,8 @@ export default function PostTableRow({ post }: PostTableRowProps) {
       </td>
       <td className="p-2 text-left">{authorName}</td>
       <td className="p-2 text-left">{createdAt}</td>
-      <td className="p-2 text-center">{views}</td>
-      <td className="p-2 text-center">{likeCount}</td>
+      <td className="p-2 text-right">{views}</td>
+      <td className="p-2 text-right">{likeCount}</td>
     </tr>
   );
 }

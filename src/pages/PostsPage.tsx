@@ -17,7 +17,7 @@ export default function PostsPage() {
       </div>
       {/* 로그인한 사용자에게만 글쓰기 버튼을 보여줍니다. */}
       {isLoggedIn && (
-        <div className="mt-1 flex justify-end">
+        <div className="flex justify-end">
           <button
             className="mr-5 py-2 px-7 rounded-md text-green-600 border border-green-600 tracking-widest
                       hover:bg-green-600 hover:text-white transition-all 0.5s cursor-pointer"
