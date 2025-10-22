@@ -56,13 +56,13 @@ function EditFormActions({ onConfirm, onCancel }: EditFormActionsProps) {
     <div className="mt-2 flex justify-end gap-8">
       <button
         onClick={onConfirm}
-        className="w-[10rem] p-3 rounded-md text-xl bg-white text-blue-600 border-2 border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition-all"
+        className="w-[6rem] p-3 rounded-md text-lg bg-white text-blue-600 border-2 border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition-all"
       >
         수정하기
       </button>
       <button
         onClick={onCancel}
-        className="w-[10rem] p-3 rounded-md text-xl bg-white text-gray-600 border-2 border-gray-600 cursor-pointer hover:bg-gray-600 hover:text-white transition-all"
+        className="w-[6rem] p-3 rounded-md text-lg bg-white text-gray-600 border-2 border-gray-600 cursor-pointer hover:bg-gray-600 hover:text-white transition-all"
       >
         취소
       </button>

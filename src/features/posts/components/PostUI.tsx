@@ -42,7 +42,7 @@ export const PostActions = ({ isAuthor, postId, onDelete, isDeleting }: PostActi
     <div className="mt-2 flex justify-between items-center">
       <button
         onClick={() => navigate('/posts')}
-        className="w-[10rem] p-3 rounded-md text-xl bg-white text-gray-600 border-2 border-gray-600 cursor-pointer hover:bg-gray-600 hover:text-white transition-all"
+        className="w-[6rem] p-3 rounded-md text-lg bg-white text-gray-600 border-2 border-gray-600 cursor-pointer hover:bg-gray-600 hover:text-white transition-all"
       >
         목록으로
       </button>
@@ -50,14 +50,14 @@ export const PostActions = ({ isAuthor, postId, onDelete, isDeleting }: PostActi
         <div className="flex gap-4">
           <button
             onClick={() => navigate(`/posts/${postId}/edit`)}
-            className="w-[10rem] p-3 rounded-md text-xl bg-white text-blue-600 border-2 border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition-all"
+            className="w-[6rem] p-3 rounded-md text-lg bg-white text-blue-600 border-2 border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white transition-all"
           >
             수정하기
           </button>
           <button
             onClick={onDelete}
             disabled={isDeleting}
-            className="w-[10rem] p-3 rounded-md text-xl bg-white text-red-600 border-2 border-red-600 cursor-pointer hover:bg-red-600 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-[6rem] p-3 rounded-md text-lg bg-white text-red-600 border-2 border-red-600 cursor-pointer hover:bg-red-600 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isDeleting ? '삭제 중...' : '삭제하기'}
           </button>
