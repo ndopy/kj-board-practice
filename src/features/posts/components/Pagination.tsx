@@ -1,4 +1,9 @@
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/16/solid';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon
+} from '@heroicons/react/16/solid';
 import type { Meta } from '@/types/post.ts';
 
 interface PaginationProps {
@@ -29,11 +34,24 @@ export default function Pagination({ meta, page, onPageChange }: PaginationProps
         [&>li]:transition-all [&>li]:duration-250 [&>li]:cursor-pointer
         [&>li:hover]:bg-green-600 [&>li:hover]:text-white"
       >
-        <li className={page === 1 ? 'cursor-not-allowed' : ''}>
+        <li
+          className={page === 1 ? 'cursor-not-allowed opacity-50' : ''}
+          onClick={() => page > 1 && onPageChange(1)}
+        >
           <button
-            onClick={() => onPageChange(page - 1)}
             disabled={page === 1}
-            className="disabled:opacity-50 cursor-pointer"
+            className="w-full h-full flex items-center justify-center cursor-pointer"
+          >
+            <ChevronDoubleLeftIcon className="h-4 w-4" aria-label="첫 페이지로 이동" />
+          </button>
+        </li>
+        <li
+          className={page === 1 ? 'cursor-not-allowed opacity-50' : ''}
+          onClick={() => page > 1 && onPageChange(page - 1)}
+        >
+          <button
+            disabled={page === 1}
+            className="w-full h-full flex items-center justify-center cursor-pointer"
           >
             <ArrowLeftIcon className="h-4 w-4" aria-label="이전 페이지" />
           </button>
@@ -41,19 +59,32 @@ export default function Pagination({ meta, page, onPageChange }: PaginationProps
         {getPageNumbers().map(pageNumber => (
           <li
             key={pageNumber}
-            className={page === pageNumber ? 'bg-green-600 text-white' : ''}
+            className={page === pageNumber ? 'bg-green-600 text-white font-bold' : ''}
             onClick={() => onPageChange(pageNumber)}
           >
             {pageNumber}
           </li>
         ))}
-        <li className={page === meta.last_page ? 'cursor-not-allowed' : ''}>
+        <li
+          className={page === meta.last_page ? 'cursor-not-allowed opacity-50' : ''}
+          onClick={() => page < meta.last_page && onPageChange(page + 1)}
+        >
           <button
-            onClick={() => onPageChange(page + 1)}
             disabled={page === meta.last_page}
-            className="disabled:opacity-50 cursor-pointer"
+            className="w-full h-full flex items-center justify-center cursor-pointer"
           >
             <ArrowRightIcon className="h-4 w-4" aria-label="다음 페이지" />
+          </button>
+        </li>
+        <li
+          className={page === meta.last_page ? 'cursor-not-allowed opacity-50' : ''}
+          onClick={() => page < meta.last_page && onPageChange(meta.last_page)}
+        >
+          <button
+            disabled={page === meta.last_page}
+            className="w-full h-full flex items-center justify-center cursor-pointer"
+          >
+            <ChevronDoubleRightIcon className="h-4 w-4" aria-label="마지막 페이지로 이동" />
           </button>
         </li>
       </ul>
