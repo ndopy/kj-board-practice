@@ -2,8 +2,12 @@ import { usePosts } from '../hooks/usePosts.ts';
 import Pagination from './Pagination';
 import PostTable from './PostTable';
 
-export default function PostList() {
-  const { posts, meta, loading, error, page, setPage } = usePosts();
+interface PostListProps {
+  query: string;
+}
+
+export default function PostList({ query }: PostListProps) {
+  const { posts, meta, loading, error, page, setPage } = usePosts(query);
 
   if (loading) {
     return <div className="text-center p-10">로딩 중...</div>;
@@ -11,6 +15,10 @@ export default function PostList() {
 
   if (error) {
     return <div className="text-center p-10 text-red-500">에러: {error}</div>;
+  }
+
+  if (posts.length === 0) {
+    return <div className="text-center p-10 text-gray-500">게시글이 없습니다.</div>;
   }
 
   return (

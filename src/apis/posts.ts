@@ -73,3 +73,17 @@ export const createPostAPI = async (postData: CreatePostPayload): Promise<Post> 
 
   return response.json();
 };
+
+export const searchPostsAPI = async (
+  query: string,
+  page: number,
+  limit: number
+): Promise<PostsResponse> => {
+  const response = await fetch(
+    `http://localhost:3000/posts/search?title=${query}&page=${page}&limit=${limit}`
+  );
+  if (!response.ok) {
+    throw new Error('게시글 검색에 실패했습니다.');
+  }
+  return response.json();
+};

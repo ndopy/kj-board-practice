@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { Meta, Post } from '@/types/post.ts';
-import { fetchPostsAPI } from '@/apis/posts.ts';
+import { fetchPostsAPI, searchPostsAPI } from '@/apis/posts.ts';
 
 const POSTS_PER_PAGE = 10;
 
-export const usePosts = () => {
+export const usePosts = (query: string) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [loading, setLoading] = useState(true);
@@ -12,11 +12,18 @@ export const usePosts = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    // 검색어가 변경되면 1페이지로 리셋
+    setPage(1);
+  }, [query]);
+
+  useEffect(() => {
     const getPosts = async () => {
       setLoading(true);
       setError(null);
       try {
-        const result = await fetchPostsAPI(page, POSTS_PER_PAGE);
+        const result = query
+          ? await searchPostsAPI(query, page, POSTS_PER_PAGE)
+          : await fetchPostsAPI(page, POSTS_PER_PAGE);
         setPosts(result.data);
         setMeta(result.meta);
       } catch (e) {
@@ -27,7 +34,7 @@ export const usePosts = () => {
     };
 
     getPosts();
-  }, [page]);
+  }, [page, query]);
 
   return { posts, meta, loading, error, page, setPage };
 };
