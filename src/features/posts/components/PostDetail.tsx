@@ -37,18 +37,20 @@ export default function PostDetail() {
   const postId = id!;
   const isAuthor = user?.userId === post.authorId;
 
+  const { title, authorName, createdAt, content, likeCount, isLikedByUser } = post;
+
   return (
     <div className="bg-white py-8 px-10 rounded-md shadow-md">
-      <PostHeader title={post.title} authorName={post.authorName} createdAt={post.createdAt} />
-      <PostBody content={post.content} />
+      <PostHeader title={title} authorName={authorName} createdAt={createdAt} />
+      <PostBody content={content} />
       <div className="flex justify-between items-center mt-4 border-t pt-4">
         <div className="flex items-center gap-2 text-gray-500">
           {/* 좋아요 에러 메시지 표시 */}
           {likeError && <p className="text-red-500 text-sm">{likeError}</p>}
         </div>
         <PostLikeButton
-          likeCount={post.likeCount}
-          isLikedByUser={post.isLikedByUser}
+          likeCount={likeCount}
+          isLikedByUser={isLikedByUser}
           onToggleLike={toggleLike}
           isLiking={isLiking}
         />
