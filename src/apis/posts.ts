@@ -5,8 +5,16 @@ export interface PostsResponse {
   meta: Meta;
 }
 
-export const fetchPostsAPI = async (page: number, limit: number): Promise<PostsResponse> => {
-  const response = await fetch(`http://localhost:3000/posts?page=${page}&limit=${limit}`);
+export const fetchPostsAPI = async (
+  page: number,
+  limit: number,
+  currentUserId?: string
+): Promise<PostsResponse> => {
+  const url = new URL('http://localhost:3000/posts');
+  url.searchParams.append('page', String(page));
+  url.searchParams.append('limit', String(limit));
+  if (currentUserId) url.searchParams.append('currentUserId', currentUserId);
+  const response = await fetch(url.toString());
 
   if (!response.ok) {
     throw new Error('데이터를 불러오는 데 실패했습니다.');
@@ -55,6 +63,23 @@ export const deletePostAPI = async (id: string): Promise<void> => {
   }
   // 삭제 성공 시에는 보통 응답 본문이 없으므로, 별도의 반환 값은 없다.
   return;
+};
+
+export const toggleLikeAPI = async (
+  postId: string
+): Promise<{ likeCount: number; isLikedByUser: boolean }> => {
+  const response = await fetch(`http://localhost:3000/posts/${postId}/like`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    throw new Error('좋아요 상태 변경에 실패했습니다.');
+  }
+  return response.json();
 };
 
 export const createPostAPI = async (postData: CreatePostPayload): Promise<Post> => {

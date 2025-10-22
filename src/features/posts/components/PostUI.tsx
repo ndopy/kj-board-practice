@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { HeartIcon as SolidHeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/24/outline';
 
 export const PostLoading = () => <div className="text-center p-10">로딩 중...</div>;
 export const PostError = ({ error }: { error: string }) => (
@@ -64,5 +66,37 @@ export const PostActions = ({ isAuthor, postId, onDelete, isDeleting }: PostActi
         </div>
       )}
     </div>
+  );
+};
+
+interface PostLikeButtonProps {
+  likeCount: number;
+  isLikedByUser: boolean;
+  onToggleLike: () => void;
+  isLiking: boolean;
+}
+
+export const PostLikeButton = ({
+  likeCount,
+  isLikedByUser,
+  onToggleLike,
+  isLiking
+}: PostLikeButtonProps) => {
+  return (
+    <button
+      onClick={onToggleLike}
+      disabled={isLiking}
+      className={`flex items-center gap-1 p-2 rounded-full transition-colors duration-200 ${
+        isLikedByUser ? 'text-red-500 hover:bg-red-100' : 'text-gray-400 hover:bg-gray-100'
+      } disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
+      aria-label={isLikedByUser ? '좋아요 취소' : '좋아요'}
+    >
+      {isLikedByUser ? (
+        <SolidHeartIcon className="h-6 w-6" />
+      ) : (
+        <OutlineHeartIcon className="h-6 w-6" />
+      )}
+      <span className="text-lg font-medium">{likeCount}</span>
+    </button>
   );
 };

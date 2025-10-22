@@ -8,6 +8,8 @@ export interface Post {
   createdAt: string;
   views: number;
   likeCount: number;
+  isLikedByUser: boolean;
+  likedBy?: string[];
   commentCount: number;
 }
 
