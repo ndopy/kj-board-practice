@@ -1,4 +1,4 @@
-import type { Meta, Post, UpdatePostPayload } from '@/types/post.ts';
+import type { Post, Meta, CreatePostPayload, UpdatePostPayload } from '@/types/post';
 
 export interface PostsResponse {
   data: Post[];
@@ -47,7 +47,7 @@ export const updatePostAPI = async (id: string, postData: UpdatePostPayload): Pr
 
 export const deletePostAPI = async (id: string): Promise<void> => {
   const response = await fetch(`http://localhost:3000/posts/${id}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
 
   if (!response.ok) {
@@ -55,4 +55,21 @@ export const deletePostAPI = async (id: string): Promise<void> => {
   }
   // 삭제 성공 시에는 보통 응답 본문이 없으므로, 별도의 반환 값은 없다.
   return;
+};
+
+export const createPostAPI = async (postData: CreatePostPayload): Promise<Post> => {
+  const response = await fetch(`http://localhost:3000/posts`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(postData)
+  });
+
+  if (!response.ok) {
+    throw new Error('게시글 작성에 실패했습니다.');
+  }
+
+  return response.json();
 };

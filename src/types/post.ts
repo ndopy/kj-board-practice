@@ -17,4 +17,5 @@ export interface Meta {
   last_page: number;
 }
 
+export type CreatePostPayload = Pick<Post, 'title' | 'content' | 'authorId' | 'authorName'>;
 export type UpdatePostPayload = Pick<Post, 'title' | 'content'>;
