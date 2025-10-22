@@ -11,22 +11,26 @@ export default function PostsPage() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-md shadow-md">
-      <div className="rounded-md">
-        <PostList />
-      </div>
-      {/* 로그인한 사용자에게만 글쓰기 버튼을 보여줍니다. */}
-      {isLoggedIn && (
-        <div className="flex justify-end">
-          <button
-            className="mr-5 py-2 px-7 rounded-md text-green-600 border border-green-600 tracking-widest
-                      hover:bg-green-600 hover:text-white transition-all 0.5s cursor-pointer"
-            onClick={handleNavigateToWritePage}
-          >
-            글쓰기
-          </button>
+    <div className="bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">게시판</h1>
+          {/* 로그인한 사용자에게만 글쓰기 버튼을 보여줍니다. */}
+          {isLoggedIn && (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#00A63D] hover:bg-[#008c34] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00A63D] transition-colors cursor-pointer"
+              onClick={handleNavigateToWritePage}
+            >
+              글쓰기
+            </button>
+          )}
         </div>
-      )}
+
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <PostList />
+        </div>
+      </div>
     </div>
   );
 }
