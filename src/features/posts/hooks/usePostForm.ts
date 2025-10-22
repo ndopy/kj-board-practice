@@ -3,12 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { createPostAPI } from '@/apis/posts.ts';
 import type { User } from '@/contexts/AuthContext.tsx';
 
-export const usePostForm = (user: User) => {
+export const usePostForm = (user: User | null) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const handleWritePost = async () => {
+    // user가 없으면 아무 작업도 하지 않음 (가드)
+    if (!user) {
+      alert('사용자 정보가 유효하지 않습니다.');
+      return;
+    }
+
     // 유효성 검사
     if (!title.trim() || !content.trim()) {
       alert('제목과 내용을 모두 입력해주세요.');

@@ -6,8 +6,8 @@ import PostForm from '@/features/posts/components/PostForm.tsx';
 
 export default function PostCreate() {
   const navigate = useNavigate();
-  // AuthContext에 isLoading이 있다고 가정합니다. 없다면 추가가 필요합니다.
   const { user, isLoading } = useAuth();
+  const { title, setTitle, content, setContent, handleWritePost } = usePostForm(user);
 
   useEffect(() => {
     // 로딩이 끝났는데 user가 없으면 로그인 페이지로 이동
@@ -25,8 +25,6 @@ export default function PostCreate() {
   if (!user) {
     return null;
   }
-
-  const { title, setTitle, content, setContent, handleWritePost } = usePostForm(user);
 
   return (
     <PostForm
